@@ -1,0 +1,264 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>jorge@portfolio</title>
+<style>
+  :root{
+    --bg:#0c0e0c;
+    --panel:#111411;
+    --panel-2:#161a16;
+    --border:#2b332b;
+    --text:#d4e8d4;
+    --dim:#6f8a6f;
+    --green:#6ee7a0;
+    --amber:#e8c37a;
+    --red:#e8847a;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#0c0e0c; --panel:#111411; --panel-2:#161a16; --border:#2b332b; --text:#d4e8d4; --dim:#6f8a6f;
+    }
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);}
+  body{line-height:1.65; font-size:15px;}
+  a{color:var(--green);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  #topbar{
+    position:sticky; top:0; z-index:10;
+    background:var(--panel); border-bottom:1px solid var(--border);
+    padding:.9rem 1.5rem; display:flex; align-items:center; gap:2rem; flex-wrap:wrap;
+  }
+  #topbar .prompt{color:var(--green); white-space:nowrap;}
+  #topbar .prompt .path{color:var(--amber);}
+  #topbar nav{display:flex; gap:1.4rem; flex-wrap:wrap;}
+  #topbar nav a{color:var(--dim); font-size:.9rem;}
+  #topbar nav a:hover{color:var(--green); text-decoration:none;}
+  #topbar nav a::before{content:"./"; color:var(--border);}
+
+  main{max-width:880px; margin:0 auto; padding:0 1.5rem;}
+
+  .win{
+    background:var(--panel); border:1px solid var(--border); border-radius:6px;
+    margin:2.5rem 0; overflow:hidden;
+  }
+  .win-bar{
+    display:flex; align-items:center; gap:.5rem;
+    background:var(--panel-2); border-bottom:1px solid var(--border);
+    padding:.6rem .9rem;
+  }
+  .win-bar .dot{width:10px; height:10px; border-radius:50%;}
+  .win-bar .dot.r{background:var(--red);}
+  .win-bar .dot.a{background:var(--amber);}
+  .win-bar .dot.g{background:var(--green);}
+  .win-bar .title{margin-left:.6rem; color:var(--dim); font-size:.82rem;}
+  .win-body{padding:1.8rem 2rem;}
+
+  #hero .win-body{padding:2.4rem 2rem;}
+  .ascii-name{color:var(--green); font-size:1.9rem; margin:0 0 .3rem 0; font-weight:700;}
+  .hero-role{color:var(--amber); margin:0 0 1.2rem 0;}
+  .hero-lead{color:var(--text); max-width:620px; margin:0 0 1.6rem 0;}
+  .hero-lead .dim{color:var(--dim);}
+  .cmd-actions{display:flex; gap:1rem; flex-wrap:wrap;}
+  .cmd-actions a{
+    border:1px solid var(--border); border-radius:4px; padding:.5rem 1rem;
+    color:var(--text); font-size:.85rem;
+  }
+  .cmd-actions a:hover{border-color:var(--green); color:var(--green); text-decoration:none;}
+  .cmd-actions a.primary{border-color:var(--green); color:var(--green);}
+
+  h2.section-title{color:var(--green); font-size:1.1rem; margin:0 0 1.6rem 0; font-weight:700;}
+  h2.section-title::before{content:"# "; color:var(--border);}
+  .section-lead{color:var(--dim); margin:-1rem 0 2rem 0; max-width:620px;}
+
+  .projects{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.1rem;}
+  .project{border:1px solid var(--border); border-radius:5px; padding:1.3rem; background:var(--panel-2);}
+  .project .path{color:var(--amber); font-size:.78rem; margin-bottom:.5rem;}
+  .project h3{margin:0 0 .5rem 0; font-size:1rem; color:var(--text);}
+  .project p{margin:0 0 .8rem 0; color:var(--dim); font-size:.87rem;}
+  .project .tags{display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:.6rem;}
+  .project .tags span{font-size:.7rem; color:var(--green); border:1px solid var(--border); border-radius:3px; padding:.15rem .45rem;}
+  .project .status{font-size:.75rem; color:var(--dim);}
+  .project .status::before{content:"→ "; color:var(--border);}
+
+  .skill-block{margin-bottom:1.6rem;}
+  .skill-block .label{color:var(--amber); font-size:.82rem; margin-bottom:.6rem;}
+  .skill-block .label::before{content:"$ "; color:var(--border);}
+  .bar-row{display:flex; align-items:center; gap:.8rem; margin-bottom:.5rem; flex-wrap:wrap;}
+  .bar-row .name{min-width:180px; font-size:.87rem; color:var(--text);}
+  .bar-track{flex:1; min-width:120px; height:6px; background:var(--panel-2); border:1px solid var(--border); border-radius:3px; overflow:hidden;}
+  .bar-fill{height:100%; background:var(--green);}
+
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:1rem;}
+  .contact-item{border:1px solid var(--border); border-radius:5px; padding:1rem 1.2rem; background:var(--panel-2);}
+  .contact-item .key{color:var(--amber); font-size:.75rem; margin-bottom:.3rem;}
+  .contact-item .key::before{content:"> "; color:var(--border);}
+  .contact-item .val{color:var(--text); font-size:.98rem;}
+
+  footer{text-align:center; color:var(--dim); font-size:.8rem; padding:2.5rem 1.5rem;}
+
+  @media (max-width:640px){
+    #topbar{flex-direction:column; align-items:flex-start; gap:.8rem;}
+    .win-body{padding:1.4rem 1.3rem;}
+    .contact-grid{grid-template-columns:1fr;}
+    .bar-row .name{min-width:140px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div class="prompt">jorge@portfolio<span class="path">:~$</span></div>
+  <nav>
+    <a href="#hero">inicio</a>
+    <a href="#proyectos">proyectos</a>
+    <a href="#habilidades">habilidades</a>
+    <a href="#contacto">contacto</a>
+  </nav>
+</div>
+
+<main>
+
+  <section id="hero" class="win">
+    <div class="win-bar">
+      <span class="dot r"></span><span class="dot a"></span><span class="dot g"></span>
+      <span class="title">whoami</span>
+    </div>
+    <div class="win-body">
+      <p class="ascii-name">Jorge Vidal Peña</p>
+      <p class="hero-role">estudiante de ASIR · sistemas y redes</p>
+      <p class="hero-lead">Monto, rompo y arreglo sistemas por cuenta propia. <span class="dim">Aquí reúno los proyectos personales con los que voy practicando: homelab, scripts de automatización, redes simuladas y algún servidor que no debería haber tocado a las dos de la mañana.</span></p>
+      <div class="cmd-actions">
+        <a href="#proyectos" class="primary">ver proyectos</a>
+        <a href="#contacto">contactar</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos" class="win">
+    <div class="win-bar">
+      <span class="dot r"></span><span class="dot a"></span><span class="dot g"></span>
+      <span class="title">ls ~/proyectos</span>
+    </div>
+    <div class="win-body">
+      <h2 class="section-title">proyectos</h2>
+      <p class="section-lead">Proyectos personales de práctica, pensados para aprender administración de sistemas y redes en entornos reales (o lo más parecido en casa).</p>
+
+      <div class="projects">
+
+        <div class="project">
+          <div class="path">~/homelab</div>
+          <h3>Homelab con Proxmox</h3>
+          <p>Servidor doméstico virtualizado sobre un mini PC reciclado: Ubuntu Server, Windows Server y un LXC con Pi-hole, todo separado por VLANs.</p>
+          <div class="tags"><span>proxmox</span><span>vlans</span></div>
+          <div class="status">en uso activo</div>
+        </div>
+
+        <div class="project">
+          <div class="path">~/scripts/backup.sh</div>
+          <h3>Backups automáticos</h3>
+          <p>Script en Bash para backups incrementales a disco externo y NAS, con rotación de copias y aviso por correo si algo falla.</p>
+          <div class="tags"><span>bash</span><span>cron</span></div>
+          <div class="status">terminado</div>
+        </div>
+
+        <div class="project">
+          <div class="path">~/packet-tracer</div>
+          <h3>Red empresarial simulada</h3>
+          <p>Diseño de red para una empresa ficticia: VLANs por departamento, routing, DHCP, ACLs y servidor de archivos central.</p>
+          <div class="tags"><span>packet tracer</span><span>routing</span></div>
+          <div class="status">proyecto de clase</div>
+        </div>
+
+        <div class="project">
+          <div class="path">~/raspberry/web</div>
+          <h3>Servidor web en Raspberry Pi</h3>
+          <p>Nginx sobre Ubuntu Server en una Raspberry Pi para alojar una web propia, con SSL y acceso SSH solo por clave.</p>
+          <div class="tags"><span>nginx</span><span>ssh</span></div>
+          <div class="status">en uso activo</div>
+        </div>
+
+        <div class="project">
+          <div class="path">~/pentest-lab</div>
+          <h3>Laboratorio de pentesting</h3>
+          <p>Entorno aislado con Kali Linux y máquinas vulnerables para practicar escaneo, enumeración y explotación, siempre en red local.</p>
+          <div class="tags"><span>kali</span><span>seguridad</span></div>
+          <div class="status">en curso</div>
+        </div>
+
+        <div class="project">
+          <div class="path">~/monitoring</div>
+          <h3>Monitorización con Zabbix</h3>
+          <p>Vigilancia del estado de las máquinas del homelab (CPU, memoria, disco, servicios) con alertas ante fallos críticos.</p>
+          <div class="tags"><span>zabbix</span><span>alertas</span></div>
+          <div class="status">terminado</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="habilidades" class="win">
+    <div class="win-bar">
+      <span class="dot r"></span><span class="dot a"></span><span class="dot g"></span>
+      <span class="title">cat skills.txt</span>
+    </div>
+    <div class="win-body">
+      <h2 class="section-title">habilidades</h2>
+
+      <div class="skill-block">
+        <div class="label">sistemas</div>
+        <div class="bar-row"><span class="name">Linux (Ubuntu / Server)</span><div class="bar-track"><div class="bar-fill" style="width:85%"></div></div></div>
+        <div class="bar-row"><span class="name">Kali Linux</span><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div></div>
+        <div class="bar-row"><span class="name">Windows Server</span><div class="bar-track"><div class="bar-fill" style="width:70%"></div></div></div>
+        <div class="bar-row"><span class="name">Proxmox / virtualización</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div></div>
+      </div>
+
+      <div class="skill-block">
+        <div class="label">redes</div>
+        <div class="bar-row"><span class="name">Cisco Packet Tracer</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div></div>
+        <div class="bar-row"><span class="name">VLANs y segmentación</span><div class="bar-track"><div class="bar-fill" style="width:70%"></div></div></div>
+        <div class="bar-row"><span class="name">DHCP / DNS / SSH</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div></div>
+      </div>
+
+      <div class="skill-block">
+        <div class="label">automatización</div>
+        <div class="bar-row"><span class="name">Bash scripting</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div></div>
+        <div class="bar-row"><span class="name">Bases de datos</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
+        <div class="bar-row"><span class="name">Nginx / Zabbix</span><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="win">
+    <div class="win-bar">
+      <span class="dot r"></span><span class="dot a"></span><span class="dot g"></span>
+      <span class="title">cat contacto.txt</span>
+    </div>
+    <div class="win-body">
+      <h2 class="section-title">contacto</h2>
+      <p class="section-lead">Si quieres comentar alguno de estos proyectos o proponerme algo, aquí tienes mis datos.</p>
+      <div class="contact-grid">
+        <div class="contact-item"><div class="key">nombre</div><div class="val">Jorge Vidal Peña</div></div>
+        <div class="contact-item"><div class="key">email</div><div class="val"><a href="mailto:jorgevidalpennna@gmail.com">jorgevidalpennna@gmail.com</a></div></div>
+        <div class="contact-item"><div class="key">telefono</div><div class="val"><a href="tel:+34747766148">+34 747 766 148</a></div></div>
+        <div class="contact-item"><div class="key">perfil</div><div class="val">Sistemas · Redes · Linux · Seguridad</div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  jorge@portfolio:~$ <span style="color:var(--dim)">exit</span> — 2026
+</footer>
+
+</body>
+</html>
+
+</body></html>
